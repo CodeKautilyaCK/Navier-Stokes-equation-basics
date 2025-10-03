@@ -1,167 +1,113 @@
-# 📘 Navier–Stokes Equations: 1D, 2D, 3D Fluid Motion & Momentum
+# Navier–Stokes Equations — Plain Text Version
 
-This repository provides a structured overview of the **Navier–Stokes equations** — the fundamental governing equations of fluid motion. The focus is on understanding **momentum conservation** in **1D, 2D, and 3D** contexts, with extensions to incompressible flows.
+## 1. Introduction
+The Navier–Stokes (NS) equations govern fluid motion.  
+They describe how fluid velocity and pressure evolve in space and time, based on:
 
----
+1. Conservation of Mass (Continuity)
+2. Conservation of Momentum (Newton’s Second Law)
 
-## 🔹 1. Introduction
-The Navier–Stokes (NS) equations describe how the velocity field of a fluid evolves under the influence of pressure, viscous, and external forces.  
-They are derived from **Newton’s Second Law** applied to a fluid element:
-
-\[
-\text{Rate of change of momentum} = \text{Forces acting on fluid}
-\]
-
-The forces include:
-- **Pressure gradient force**
-- **Viscous (diffusion) force**
-- **Body forces** (e.g., gravity, electromagnetic)
+These are nonlinear partial differential equations (PDEs) used in computational fluid dynamics (CFD).
 
 ---
 
-## 🔹 2. Governing Equations
+## 2. Continuity Equation (Mass Conservation)
 
-### Continuity (Mass Conservation)
-\[
-\nabla \cdot \mathbf{u} = 0 \quad \text{(for incompressible flow)}
-\]
+General form:  
+ρ ( ∂u/∂x + ∂v/∂y + ∂w/∂z ) + ∂ρ/∂t = 0
 
-### Momentum Conservation (General Form)
-\[
-\rho \left( \frac{\partial \mathbf{u}}{\partial t} 
-+ (\mathbf{u} \cdot \nabla)\mathbf{u} \right) 
-= -\nabla p + \mu \nabla^2 \mathbf{u} + \rho \mathbf{f}
-\]
+For incompressible flow (constant ρ):  
+div(u) = ∂u/∂x + ∂v/∂y + ∂w/∂z = 0
 
-Where:
-- \(\mathbf{u} = (u,v,w)\) → velocity components  
-- \(p\) → pressure  
-- \(\rho\) → density  
-- \(\mu\) → dynamic viscosity  
-- \(\mathbf{f}\) → body forces  
+Where:  
+- ρ = density  
+- u = velocity vector (u, v, w)
 
 ---
 
-## 🔹 3. 1D Navier–Stokes (x-direction)
-\[
-\rho \left( \frac{\partial u}{\partial t} 
-+ u \frac{\partial u}{\partial x} \right) 
-= - \frac{\partial p}{\partial x} 
-+ \mu \frac{\partial^2 u}{\partial x^2} 
-+ \rho f_x
-\]
+## 3. Momentum Conservation (Navier–Stokes)
 
-- Single velocity component \(u(x,t)\)  
-- Useful for **pipe/channel flow models, shock tubes, 1D convection–diffusion**  
+Vector form:  
+ρ * ( ∂u/∂t + u · ∇u ) = - ∇p + μ ∇²u + ρ * f
+
+Terms:  
+- Left: Inertia (unsteady + convective acceleration)  
+- Right: Forces (pressure, viscous, body)
 
 ---
 
-## 🔹 4. 2D Navier–Stokes (x–y plane)
+## 4. 1D Navier–Stokes (x-direction)
 
-**x-momentum:**
-\[
-\rho \left( 
-\frac{\partial u}{\partial t} 
-+ u\frac{\partial u}{\partial x} 
-+ v\frac{\partial u}{\partial y} 
-\right) 
-= -\frac{\partial p}{\partial x} 
-+ \mu \left( 
-\frac{\partial^2 u}{\partial x^2} 
-+ \frac{\partial^2 u}{\partial y^2} 
-\right) 
-+ \rho f_x
-\]
+ρ * ( ∂u/∂t + u * ∂u/∂x ) = - ∂p/∂x + μ * ∂²u/∂x² + ρ * fx
 
-**y-momentum:**
-\[
-\rho \left( 
-\frac{\partial v}{\partial t} 
-+ u\frac{\partial v}{\partial x} 
-+ v\frac{\partial v}{\partial y} 
-\right) 
-= -\frac{\partial p}{\partial y} 
-+ \mu \left( 
-\frac{\partial^2 v}{\partial x^2} 
-+ \frac{\partial^2 v}{\partial y^2} 
-\right) 
-+ \rho f_y
-\]
-
-Applications:
-- Lid-driven cavity  
-- Flow over a cylinder  
-- Natural convection in cavities  
+- Single velocity component u(x, t)  
+- Applications: pipe flow, channel flow, shock tubes
 
 ---
 
-## 🔹 5. 3D Navier–Stokes (x–y–z domain)
+## 5. 2D Navier–Stokes (x-y plane)
 
-**x-momentum:**
-\[
-\rho \left( 
-\frac{\partial u}{\partial t} 
-+ u\frac{\partial u}{\partial x} 
-+ v\frac{\partial u}{\partial y} 
-+ w\frac{\partial u}{\partial z} 
-\right) 
-= -\frac{\partial p}{\partial x} 
-+ \mu \nabla^2 u 
-+ \rho f_x
-\]
+x-momentum:  
+ρ * ( ∂u/∂t + u * ∂u/∂x + v * ∂u/∂y ) 
+= - ∂p/∂x + μ * ( ∂²u/∂x² + ∂²u/∂y² ) + ρ * fx
 
-**y-momentum:**
-\[
-\rho \left( 
-\frac{\partial v}{\partial t} 
-+ u\frac{\partial v}{\partial x} 
-+ v\frac{\partial v}{\partial y} 
-+ w\frac{\partial v}{\partial z} 
-\right) 
-= -\frac{\partial p}{\partial y} 
-+ \mu \nabla^2 v 
-+ \rho f_y
-\]
+y-momentum:  
+ρ * ( ∂v/∂t + u * ∂v/∂x + v * ∂v/∂y ) 
+= - ∂p/∂y + μ * ( ∂²v/∂x² + ∂²v/∂y² ) + ρ * fy
 
-**z-momentum:**
-\[
-\rho \left( 
-\frac{\partial w}{\partial t} 
-+ u\frac{\partial w}{\partial x} 
-+ v\frac{\partial w}{\partial y} 
-+ w\frac{\partial w}{\partial z} 
-\right) 
-= -\frac{\partial p}{\partial z} 
-+ \mu \nabla^2 w 
-+ \rho f_z
-\]
-
-Applications:
-- Aircraft aerodynamics  
-- Turbulent pipe/channel flows  
-- Multiphase & reacting flows  
+- Applications: lid-driven cavity, flow over a cylinder, natural convection
 
 ---
 
-## 🔹 6. Key Notes
-- **1D → Simplification**, often pedagogical.  
-- **2D → Captures key flow physics, less computational cost.**  
-- **3D → Real-world accuracy, but highly expensive.**  
-- Turbulence modeling (RANS, LES, DNS) modifies these base equations for high Reynolds numbers.  
+## 6. 3D Navier–Stokes (x-y-z)
+
+x-momentum:  
+ρ * ( ∂u/∂t + u * ∂u/∂x + v * ∂u/∂y + w * ∂u/∂z ) 
+= - ∂p/∂x + μ * ( ∂²u/∂x² + ∂²u/∂y² + ∂²u/∂z² ) + ρ * fx
+
+y-momentum:  
+ρ * ( ∂v/∂t + u * ∂v/∂x + v * ∂v/∂y + w * ∂v/∂z ) 
+= - ∂p/∂y + μ * ( ∂²v/∂x² + ∂²v/∂y² + ∂²v/∂z² ) + ρ * fy
+
+z-momentum:  
+ρ * ( ∂w/∂t + u * ∂w/∂x + v * ∂w/∂y + w * ∂w/∂z ) 
+= - ∂p/∂z + μ * ( ∂²w/∂x² + ∂²w/∂y² + ∂²w/∂z² ) + ρ * fz
+
+- Applications: 3D CFD flows, aircraft aerodynamics, turbulent channels
 
 ---
 
-## 🔹 7. Next Steps in This Repo
-- ✅ Numerical solution in Python (FDM/FVM) for 1D diffusion/convection  
-- ✅ Extension to 2D lid-driven cavity  
-- ✅ Baseline 3D case setup (simple channel flow)  
-- 🔄 PINN implementation to solve simplified Navier–Stokes  
+## 7. Key Notes
+
+- 1D: Simplest, often educational  
+- 2D: Captures main physics, moderate computational cost  
+- 3D: Realistic, high computational cost  
+- Turbulence: High-Re flows require RANS, LES, or DNS models  
+- Boundary Conditions: Inlet, outlet, wall, and symmetry conditions are critical
 
 ---
 
-## 📚 References
-- Panton, R. L. *Incompressible Flow*  
-- Ferziger, J. H., & Perić, M. *Computational Methods for Fluid Dynamics*  
-- Karniadakis, G. E. *Physics-Informed Machine Learning*  
+## 8. Applications
+
+- Aerospace: Lift, drag, and airflow over wings  
+- Automotive: Vehicle aerodynamics, cooling systems  
+- Civil: Wind load on buildings, hydrodynamics  
+- Energy: Turbines, combustion chambers, battery cooling  
+- Medicine: Blood flow simulation, biofluid dynamics
 
 ---
+
+## 9. References
+
+- Panton, R. L. “Incompressible Flow”  
+- Ferziger, J. H., & Perić, M. “Computational Methods for Fluid Dynamics”  
+- Karniadakis, G. E. “Physics-Informed Machine Learning”
+
+---
+
+## 10. Next Steps
+
+- Implement 1D finite difference solution  
+- Extend to 2D lid-driven cavity flow  
+- Implement basic 3D channel flow simulation  
+- Optional: Solve simplified NS using PINNs for proof-of-concept
